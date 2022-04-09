@@ -1,4 +1,5 @@
 from certifier.arguments import get_parser
+from certifier.setup import config
 import yaml
 
 
@@ -11,11 +12,12 @@ def main():
     print(command)
 
     if(command == 'setup'):
+        config()
         exit(0)
 
     try:
-        config = yaml.load(parsed_arguments.config,
-                           Loader=yaml.FullLoader)
+        conf = yaml.load(parsed_arguments.config,
+                         Loader=yaml.FullLoader)
     except FileNotFoundError:
         print("Cannot find a configuration file, please setup your environment first")
         exit(1)
